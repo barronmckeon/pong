@@ -10,20 +10,45 @@ const PADDLE_WIDTH = 20;
 const BALL_SIZE = 20;
 
 // Get the computer paddle element
-const computerPaddle = document.querySelector('.computer-paddle');
+const computerPaddle = document.querySelector(".computer-paddle");
+
+//Get the ball element
+const ball = document.querySelector(".ball");
 
 // The y-velocity of the computer paddle
 let computerPaddleYPosition = 0;
 let computerPaddleYVelocity = 1;
 
+// ball movement
+let ballpositionY = 10;
+let ballVelocityY = 10;
+
+let ballpositionX = 10;
+let ballVelocityX = 10;
+
 // Update the pong world
+
 function update() {
+  // Update the computer paddle's position
+  computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
 
-    // Update the computer paddle's position
-    computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
+  // Apply the y-position
+  computerPaddle.style.top = `${computerPaddleYPosition}px`;
 
-    // Apply the y-position 
-    computerPaddle.style.top = `${computerPaddleYPosition}px`;
+  //ball position Y
+  ballpositionY = ballpositionY + ballVelocityY;
+  ball.style.top = ballpositionY + "px";
+
+  //ball position X
+  ballpositionX = ballpositionX + ballVelocityX;
+  ball.style.left = ballpositionX + "px";
+
+  if (ballpositionY <= 10 || ballpositionY >= 480) {
+    ballVelocityY *= -1;
+  }
+  if (ballpositionX <= 10 || ballpositionX >= 680) {
+    ballVelocityX *= -1;
+  }
 }
 
 // Call the update() function every 35ms
